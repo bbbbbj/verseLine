@@ -32,10 +32,8 @@ input.onkeyup = function(){
 		request.onreadystatechange = function(){
 			if(request.readyState === 4){
 				if(request.status === 200){
-					var li = document.createElement('li');
-					searchResult.appendChild('li');
 					var data = JSON.parse(request.responseText);
-					li.innerHTML = data;
+					searchResult.innerHTML = data;
 				}else{
 					alert("发生错误：" + request.status);
 				}

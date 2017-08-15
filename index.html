@@ -3,11 +3,34 @@
 <head>
 	<meta charset="UTF-8">
 	<title>集句系统</title>
+	<style>
+		html,body{
+		}
+		.container{
+			height: 1500px;
+		}
+		#canvas{
+			background-color: #090723;
+			display: block;
+			position: fixed;
+		}
+	</style>
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/reset.css">
 </head>
 <body>
-<div class="container">
+<div class="container" id="container">
+	<canvas id="canvas"></canvas>
+</div>
+
+	<!-- <div class="container">
+		<div class="header"></div>
+		<div class="banner"></div>
+		<div class="con-focus"></div>
+		<div class="con-reco"></div>
+		<div class="footer"></div>
+	</div> -->
+<!-- <div class="container">
 	<div class="search-box">
 		<input type="text" name="" id="input1" class="search-input">
 		<button id="btn" class="search-btn">搜索</button>
@@ -16,6 +39,87 @@
 	</div>
 </div>
 <script src="js/ajax.js"></script>
-<script src="js/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script> -->
+<script>
+
+	var con = document.getElementById('container');
+	var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
+	var oHeight = document.documentElement.clientHeight || document.body.clientHeight;
+	var h1 = -canvas.height*0.02,r2 = 20,r3 = 10,r4 = 40;
+	window.onscroll = function(){
+		var timer = null;
+		sTop = document.documentElement.scrollTop || document.body.scrollTop;
+		if(sTop !== 0){
+			timer = setInterval(function(){
+				h1 = h1-20;
+			},20);
+		}
+	}
+	window.onresize = function(){
+		oWidth = document.documentElement.clientWidth || document.body.clientWidth;
+		oHeight = document.documentElement.clientHeight || document.body.clientHeight;
+		oCanvas();
+	}
+	function oCanvas(){
+		var canvas = document.getElementById('canvas');//获取canvas元素
+		canvas.width = oWidth;
+		canvas.height = oHeight;
+		var context = canvas.getContext('2d');
+		context.beginPath();
+		context.fillStyle = 'rgb(66,20,42)';
+		context.arc(canvas.width*0.7,h1,canvas.width*0.12,0,Math.PI*2);
+		context.fill();
+		context.closePath();
+		context.beginPath();
+		context.fillStyle = 'rgb(16,18,40)';
+		context.arc(canvas.width*0.68,canvas.height*0.7,r2,0,Math.PI*2);
+		context.fill();
+		context.closePath();
+		context.beginPath();
+		context.fillStyle = 'rgb(25,18,40)';
+		context.arc(canvas.width*0.65,canvas.height*0.3,r3,0,Math.PI*2);
+		context.fill();
+		context.closePath();
+		context.beginPath();
+		context.fillStyle = 'rgb(33,27,32)';
+		context.arc(canvas.width*0.9,canvas.height*0.45,r4,0,Math.PI*2);
+		context.fill();
+
+		//创建构造函数circle
+		function Circle(){
+			this.x = Math.random()*canvas.width;//在画布随机生成x值
+			this.r = Math.random()*1.5;//随机半径
+			//绘制圆形
+			this.y = Math.random()*canvas.height;
+			
+			this.paint = function(){
+				context.beginPath();
+				context.fillStyle = '#706e7f';
+				context.arc(this.x,this.y,this.r,0,Math.PI*2);//绘制圆形
+				context.fill();
+			}
+		}
+		var circles = [];
+		//创建圆形对象
+		function createCircles(){
+			for(var i=0;i<100;i++){
+				var circle = new Circle();//调用构造函数
+				circles[circles.length] = circle;//将绘制的图形追加到数组
+			}
+		}
+		//绘制所有圆形
+		function paintCircles(){
+			for(var i=0;i<circles.length;i++){
+				circles[i].paint();//遍历数组，将数组内的图形绘制
+			}
+		}
+		createCircles();
+		paintCircles();
+	}
+	oCanvas();
+	
+
+
+</script>
 </body>
 </html>
