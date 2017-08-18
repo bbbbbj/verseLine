@@ -3,24 +3,143 @@
 <head>
 	<meta charset="UTF-8">
 	<title>集句系统</title>
-	<style>
-		html,body{
-		}
-		.container{
-			height: 1500px;
-		}
-		#canvas{
-			background-color: #090723;
-			display: block;
-			position: fixed;
-		}
-	</style>
+	<link rel="stylesheet" href="font/iconfont.css">
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/reset.css">
 </head>
 <body>
 <div class="container" id="container">
 	<canvas id="canvas"></canvas>
+	<canvas id="canvas2"></canvas>
+	<ul class="circle" id="circle">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+<div class="container-box">
+	<div class="content">
+		<header>
+			<span>鲨鱼辣椒</span>
+			<svg class="iconfont" aria-hidden="true">
+				<use xlink:href="#icon-shayu"></use>
+			</svg>
+			<ul class="header-menu">
+				<li>首页</li>
+				<li>图标库
+					<ul>
+						<li>官方图标</li>
+						<li>多彩图标</li>
+						<li>所有图标</li>
+					</ul>
+				</li>
+				<li>图标管
+					<ul>
+						<li>我的图标</li>
+						<li>我的收藏</li>
+						<li>我的项目</li>
+					</ul>
+				</li>
+				<li>帮助
+					<ul>
+						<li>我的图标</li>
+						<li>我的收藏</li>
+						<li>我的项目</li>
+					</ul>
+				</li>
+				<li>···
+					<ul>
+						<li>我的图标</li>
+						<li>我的收藏</li>
+						<li>我的项目</li>
+					</ul>
+				</li>
+			</ul>
+			<i class="iconfont">&#xf0148;</i>
+			<i class="iconfont">&#xe610;</i>
+			<i class="iconfont">&#xe60e;</i>
+		</header>
+		<div class="search-box" id="search-box">
+			<svg class="iconfont search-icon" aria-hidden="true">
+				<use xlink:href="#icon-shayu1"></use>
+			</svg>
+			<input type="text" class="search-verse" id="search-verse" placeholder="Shake chili">
+			<div class="key-box" id="key-box">
+				<ul>
+					<li>
+						<svg class="iconfont search-icon" aria-hidden="true">
+							<use xlink:href="#icon-guochandonghuatuijian"></use>
+						</svg>
+						<span></span>
+					</li>
+					<li>
+						<svg class="iconfont search-icon" aria-hidden="true">
+							<use xlink:href="#icon-feijicaise"></use>
+						</svg>
+						<span></span>
+					</li>
+				</ul>
+				<div class="ball"></div>
+			</div>
+			<p class="search-title">胸藏文墨怀若谷，腹有诗书气自华</p>
+			<p class="search-address">www.Shake chili.com</p>
+		</div>
+		<ul class="con-display" id="con-display">
+			<li>
+				<svg class="iconfont search-icon" aria-hidden="true">
+					<use xlink:href="#icon-qiatongrenwu"></use>
+				</svg>
+				<h5>katong</h5>
+				<p>枫叶荻花秋瑟瑟</p>
+				<p>闲云潭影日悠悠</p>
+			</li>
+			<li>
+				<svg class="iconfont search-icon" aria-hidden="true">
+					<use xlink:href="#icon-minilong"></use>
+				</svg>
+				<h5>katong</h5>
+				<p>枫叶荻花秋瑟瑟</p>
+				<p>闲云潭影日悠悠</p>
+			</li>
+			<li>
+				<svg class="iconfont search-icon" aria-hidden="true">
+					<use xlink:href="#icon-zemu"></use>
+				</svg>
+				<h5>minilong</h5>
+				<p>飞雪连天射白鹿</p>
+				<p>笑书神侠倚碧鸳</p>
+			</li>
+			<li>
+				<svg class="iconfont search-icon" aria-hidden="true">
+					<use xlink:href="#icon-qiatongqiamian"></use>
+				</svg>
+				<h5>katong</h5>
+				<p>枫叶荻花秋瑟瑟</p>
+				<p>闲云潭影日悠悠</p>
+			</li>
+			<li>
+				<svg class="iconfont search-icon" aria-hidden="true">
+					<use xlink:href="#icon-052"></use>
+				</svg>
+				<h5>katong</h5>
+				<p>枫叶荻花秋瑟瑟</p>
+				<p>闲云潭影日悠悠</p>
+			</li>
+			<li>
+				<svg class="iconfont search-icon" aria-hidden="true">
+					<use xlink:href="#icon-dongwu"></use>
+				</svg>
+				<h5>katong</h5>
+				<p>枫叶荻花秋瑟瑟</p>
+				<p>闲云潭影日悠悠</p>
+			</li>
+		</ul>
+	</div>
+	<footer>
+		<p>鲨鱼辣椒无情对集句系统</p>
+		<p>Shake pepper is a ruthless system of phrase</p>
+	</footer>
+</div>
 </div>
 
 	<!-- <div class="container">
@@ -40,86 +159,10 @@
 </div>
 <script src="js/ajax.js"></script>
 <script src="js/jquery.min.js"></script> -->
-<script>
 
-	var con = document.getElementById('container');
-	var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
-	var oHeight = document.documentElement.clientHeight || document.body.clientHeight;
-	var h1 = -canvas.height*0.02,r2 = 20,r3 = 10,r4 = 40;
-	window.onscroll = function(){
-		var timer = null;
-		sTop = document.documentElement.scrollTop || document.body.scrollTop;
-		if(sTop !== 0){
-			timer = setInterval(function(){
-				h1 = h1-20;
-			},20);
-		}
-	}
-	window.onresize = function(){
-		oWidth = document.documentElement.clientWidth || document.body.clientWidth;
-		oHeight = document.documentElement.clientHeight || document.body.clientHeight;
-		oCanvas();
-	}
-	function oCanvas(){
-		var canvas = document.getElementById('canvas');//获取canvas元素
-		canvas.width = oWidth;
-		canvas.height = oHeight;
-		var context = canvas.getContext('2d');
-		context.beginPath();
-		context.fillStyle = 'rgb(66,20,42)';
-		context.arc(canvas.width*0.7,h1,canvas.width*0.12,0,Math.PI*2);
-		context.fill();
-		context.closePath();
-		context.beginPath();
-		context.fillStyle = 'rgb(16,18,40)';
-		context.arc(canvas.width*0.68,canvas.height*0.7,r2,0,Math.PI*2);
-		context.fill();
-		context.closePath();
-		context.beginPath();
-		context.fillStyle = 'rgb(25,18,40)';
-		context.arc(canvas.width*0.65,canvas.height*0.3,r3,0,Math.PI*2);
-		context.fill();
-		context.closePath();
-		context.beginPath();
-		context.fillStyle = 'rgb(33,27,32)';
-		context.arc(canvas.width*0.9,canvas.height*0.45,r4,0,Math.PI*2);
-		context.fill();
-
-		//创建构造函数circle
-		function Circle(){
-			this.x = Math.random()*canvas.width;//在画布随机生成x值
-			this.r = Math.random()*1.5;//随机半径
-			//绘制圆形
-			this.y = Math.random()*canvas.height;
-			
-			this.paint = function(){
-				context.beginPath();
-				context.fillStyle = '#706e7f';
-				context.arc(this.x,this.y,this.r,0,Math.PI*2);//绘制圆形
-				context.fill();
-			}
-		}
-		var circles = [];
-		//创建圆形对象
-		function createCircles(){
-			for(var i=0;i<100;i++){
-				var circle = new Circle();//调用构造函数
-				circles[circles.length] = circle;//将绘制的图形追加到数组
-			}
-		}
-		//绘制所有圆形
-		function paintCircles(){
-			for(var i=0;i<circles.length;i++){
-				circles[i].paint();//遍历数组，将数组内的图形绘制
-			}
-		}
-		createCircles();
-		paintCircles();
-	}
-	oCanvas();
-	
-
-
-</script>
+<script src="js/canvas.js"></script>
+<script src="js/index.js"></script>
+<script src="js/ajax.js" charset="utf-8"></script>
+<script src="font/iconfont.js"></script>
 </body>
 </html>

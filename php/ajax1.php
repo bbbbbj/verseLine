@@ -10,12 +10,12 @@
 	mysql_select_db("verse")
 		or die("不能连接到Verse".mysql_error());
 	$keyword=$_GET['keyword'];
-	$q="SELECT count(*) FROM 属性 where 词性=(SELECT 词性 FROM 属性 where 诗句='{$keyword}')";
+	$q="SELECT count(*) FROM 属性 where 作者='{$keyword}'";
 	$result1 = mysql_query($q);
 	 if (!$result1) echo "SQL错误：".mysql_error();
 	$row1 = mysql_fetch_array($result1);
 	$allnum=$row1[0];
-	$k="SELECT * FROM 属性 where 词性=(SELECT 词性 FROM 属性 where 诗句='{$keyword}')";
+	$k="SELECT * FROM 属性 where 作者='{$keyword}'";
 
 	$result = mysql_query($k);
 	 if (!$result) echo "SQL错误：".mysql_error();

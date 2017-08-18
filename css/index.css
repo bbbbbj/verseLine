@@ -1,32 +1,314 @@
-.search-box{
-	width: 300px;
-	height: 30px;
+/*图标*/
+.iconfont{
+	width: 2em;
+	height: 2em;
+	vertical-align: -0.15em;
+	fill: currentColor;
+	overflow: hidden;
+	font-size: 24px !important;
+	transition: all .5s;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+}
+.container{
+	width: 100%;
 	position: relative;
 }
-.search-input{
-	width: 75%;
-	height: 100%;
-	float: left;
-	box-sizing: border-box;
+#canvas{
+	background-color: #090723;
+	display: block;
+	position: fixed;
 }
-.search-btn{
-	width: 20%;
-	height: 100%;
-	float: right;
+#canvas2{
+	display: block;
+	position: fixed;
+	z-index: 2;
 }
-.search-box ul{
+/*星球*/
+.circle{
+	z-index: 10;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+.circle li{
+	border-radius: 50%;
 	position: absolute;
-	top: 30px;
-	left: 0;
-	box-sizing: border-box;
-	border: 1px solid #aaa;
-	border-top: none;
+	transition: all 5s;
 }
-.search-box ul li{
-	width: 75%;
+.circle li:nth-child(1){
+	width: 350px;
+	height: 350px;
+	top: -200px;
+	right: 12%;
+	background: radial-gradient(circle at 100px 100px,#53253c,rgb(66,20,42));
+}
+.circle li:nth-child(2){
+	width: 30px;
 	height: 30px;
-	border-bottom: 1px solid #aaa;
+	top: 250px;
+	right: 30%;
+	background: radial-gradient(circle at 10px 10px,#2c2046,rgb(25,18,40));
 }
-.search-box ul li:last-child{
-	border: none;
+.circle li:nth-child(3){
+	width: 60px;
+	height: 60px;
+	top: 500px;
+	right: 25%;
+	background: radial-gradient(circle at 20px 20px,#11163f,rgb(16,18,40));
+}
+.circle li:nth-child(4){
+	width: 100px;
+	height: 100px;
+	top: 300px;
+	right: 12%;
+	background: radial-gradient(circle at 30px 30px,#372d35,rgb(33,27,32));
+}
+.container-box{
+	width: 100%;
+	position: absolute;
+	z-index: 100;
+	top: 0;
+}
+.content{
+	width: 1200px;
+	height: 100%;
+	left: 50%;
+	margin: 0 auto;
+	
+}
+/*页面头部*/
+header{
+	width: 100%;
+	height: 50px;
+	margin-top: 10px;
+	font-size: 24px;
+	color: #fff;
+	letter-spacing: 4px;
+	font-family: 'Micorsoft YaHei';
+	line-height: 50px;
+}
+.header-menu{
+	height: 50px;
+	display: inline-block;
+	height: 30px;
+}
+.header-menu>li{
+	width: 80px;
+	font-size: 16px;
+	padding-left: 20px;
+	display: inline-block;
+	letter-spacing: 0;
+	color: #fff;
+	opacity: .5;
+	position: relative;
+	line-height: 50px;
+	box-sizing: border-box;
+}
+.header-menu>li:hover{
+	opacity: 1;
+	cursor: pointer;
+}
+.header-menu li ul{
+	position: absolute;
+	left: 0;
+	background-color: #090723;
+	border-radius: 5px;
+	top: 40px;
+	visibility: hidden;
+	opacity: 0;
+	transition: all .5s;
+}
+.header-menu li ul li{
+	width: 120px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 12px;
+	padding-left: 20px;
+	letter-spacing: 0;
+	color: #fff;
+	opacity: .8;
+	box-sizing: border-box;
+}
+.header-menu>li:hover ul{
+	visibility: visible;
+	opacity: 1;
+	transition: all .5s;
+}
+.header-menu li ul li:hover{
+	background-color: rgb(28,27,42);
+}
+i.iconfont{
+	float: right;
+	margin-left: 20px;
+}
+i.iconfont:hover{
+	font-size: 30px;
+	color: rgb(90,20,42);
+	cursor: pointer;
+}
+/*搜索框部分*/
+.search-box{
+	width: 80%;
+	height: 300px;
+	margin: 120px auto;
+
+}
+.search-box .search-icon{
+	display: block;
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+}
+.search-verse{
+	width: 80%;
+	height: 60px;
+	margin: 50px auto;
+	display: block;
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+	border: 1px solid #1e2556;
+	border-radius: 30px;
+	background: #0f0f33;
+}
+.search-verse:hover{
+	border: 1px solid #fff;
+}
+.search-title{
+	width: 100%;
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+	letter-spacing: 1px;
+}
+.search-address{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	font-size: 10px;
+	color: #2e2c4b;
+}
+.key-box{
+	width: 440px;
+	height: 220px;
+	border-radius: 0 0 240px 240px;
+	border-color: #1e2556;
+	border-style: dashed;
+	border-width: 0 2px 2px 2px;
+	margin: -50px auto 0;
+	position: relative;
+	display: none;
+}
+.key-box ul{
+	width: auto;
+	height: 180px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.key-box ul li{
+	display: table;
+	min-width: 180px;
+	width: auto;
+	height: 50px;
+	box-sizing: border-box;
+	padding: 0 20px;
+	margin: 30px auto;
+	text-align: center;
+	line-height: 50px;
+	font-size: 16px;
+	letter-spacing: 1px;
+	border-radius: 25px;
+	cursor: pointer;
+	box-sizing: border-box;
+	transition: all .5s;
+}
+.key-box ul li .search-icon{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+}
+.key-box ul li:first-child{
+	color: red;
+	background-color: #0f0f33;
+	border: 1px solid #1e2556;
+}
+.key-box ul li:last-child{
+	color: #666;
+	background-color: rgba(17,16,36,.6);
+}
+.key-box ul li:last-child:hover{
+	color: red;
+	background-color: #0f0f33;
+	border: 1px solid #1e2556;
+}
+.key-box .ball{
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	background-color: #1e2556;
+	position: absolute;
+	left: 401px;
+	top: 101px;
+	z-index: 200;
+}
+/*内容展示区*/
+.con-display{
+	width: 95%;
+	height: 900px;
+	margin: 0 auto;
+}
+.con-display li{
+	width: 30%;
+	float: left;
+	height: 350px;
+	margin: 25px 15px;
+	background-color: #fff;
+	transition: all .5s;
+	border-radius: 5px;
+}
+.con-display li:hover{
+	transform: scale(1.05);
+}
+.con-display li .search-icon{
+	display: block;
+	width: 80px;
+	height: 80px;
+	margin: 30px auto 10px;
+}
+.con-display li h5{
+	width: 100%;
+	text-align: center;
+	font-size: 16px;
+	margin-bottom: 40px;
+	color: #666;
+}
+.con-display li p{
+	font-size: 24px;
+	width: 100%;
+	line-height: 60px;
+	text-align: center;
+	letter-spacing: 2px;
+	color: #090723;
+}
+/*页面尾部*/
+footer{
+	width: 100%;
+	height: 220px;
+	background: rgba(16,15,31,.6);
+}
+footer p:first-child{
+	font-size: 20px;
+	text-align: center;
+	padding-top: 80px;
+	color: #fff;
+}
+footer p:last-child{
+	font-size: 14px;
+	text-align: center;
+	margin-top: 10px;
+	color: #666;
 }
