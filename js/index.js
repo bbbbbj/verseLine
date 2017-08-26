@@ -19,6 +19,8 @@
 	var regiBtn = document.getElementById('register');//注册按钮
 	var loginBtn = document.getElementById('login');//注册按钮
 	var userWel = document.getElementsByClassName('user-wel')[0];
+	var conDisplay = document.getElementById('con-display');//展示区
+
 	var userSer,passwordSer,passSer,telSer,emailSer;
 	//查询结果分页
 	function goPage(){
@@ -247,6 +249,7 @@
 	}
 	
 	
+	
 	/*addEventListener:监听DOM元素的事件
 
 	target: 监听对象
@@ -280,6 +283,7 @@
 		}
 	}
 
+
 	addEventHander(searchVerse,'focus',searchVerseFocus);
 	addEventHander(searchVerse,'keyup',searchVerseKeyup);
 	addEventHander(searchVerse,'blur',searchVerseBlur);
@@ -291,6 +295,8 @@
 	addEventHander(wrapBox,'click',regiNone);
 	addEventHander(regiBtn,'click',register);
 	addEventHander(loginBtn,'click',login);
+	
+
 
 
 
