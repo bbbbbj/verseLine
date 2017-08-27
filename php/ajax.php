@@ -97,7 +97,7 @@
 			echo $row['密码'];
 			if(!is_array($test)){
 				echo '该用户不存在';
-			}else if(!is_array($test)){
+			}else if(!is_array($test1)){
 				echo '密码错误';
 			}else{
 				echo '登录成功';

@@ -1,5 +1,4 @@
-window.onload=function(){
-	console.log('aaa');
+
 	var input = document.getElementById('input1');
 	var searchResult = document.getElementById('search-result');
 	var searchBox = document.getElementById('search-box');
@@ -192,4 +191,3 @@ window.onload=function(){
 	}
 	addEventHander(conPage,'click',pageSpanClick);
 	addEventHander(keyBox,'click',keyBoxClick);
-}

@@ -1,3 +1,20 @@
+window.onload = function(){
+	if(localStorage.getItem('name')){
+		popUpInput[5].value = localStorage.getItem('name');
+		popUpInput[6].value = localStorage.getItem('pwd');
+		login();
+	}
+	var name = localStorage.getItem('name');
+	var conDisplayLiI = conDisplay.getElementsByTagName('i');
+	for(let i=0;i<conDisplayLiI.length;i++){
+		var p = conDisplayLiI[i].parentNode.getElementsByTagName('p')[0].innerHTML + '<br>' + conDisplayLiI[i].parentNode.getElementsByTagName('p')[1].innerHTML;
+		if(localStorage.getItem(name+p)){
+			conDisplayLiI[i].style.color = 'rgb(90,20,42)';
+		}
+	}
+
+}
+	var storage = window.localStorage;
 	var con = document.getElementById('container');
 	var oCircle = document.getElementById('circle');
 	var oLi = oCircle.getElementsByTagName('li');
@@ -8,7 +25,7 @@
 	var searchBoxP = searchBox.getElementsByTagName('p');
 	var keyBox = document.getElementById('key-box');
 	var keyBoxLi = keyBox.getElementsByTagName('li');
-	var oI = document.getElementsByTagName('i');//登录注册喜好图标
+	var oI = document.getElementsByClassName('iconClick');//登录注册喜好图标
 	var popUp = document.getElementById('pop-up-box');//弹出层
 	var popUpLi = popUp.getElementsByTagName('li');//弹出层所有li
 	var popUpInput = popUp.getElementsByTagName('input');//注册登录的所有的输入框
@@ -20,8 +37,46 @@
 	var loginBtn = document.getElementById('login');//注册按钮
 	var userWel = document.getElementsByClassName('user-wel')[0];
 	var conDisplay = document.getElementById('con-display');//展示区
-
+	var exit = document.getElementsByClassName('exit')[0];
 	var userSer,passwordSer,passSer,telSer,emailSer;
+		//登录按钮
+	function login(){
+		if(popUpInput[5].value === ''){
+			popUpSpan[5].innerHTML = '用户名不能为空';
+		}else if(popUpInput[6].value === ''){
+			popUpSpan[6].innerHTML = '密码不能为空';
+		}else{
+			var request = new XMLHttpRequest();
+			request.open("GET","php/ajax.php?action=userService&username="+popUpInput[5].value+"&password="+popUpInput[6].value);
+			request.send();
+			request.onreadystatechange = function(){
+				if(request.readyState === 4){
+					if(request.status === 200){
+						var data = request.responseText;
+						if(data === '该用户不存在'){
+							popUpSpan[5].innerHTML = data;
+						}else if(data === '密码错误'){
+							popUpSpan[6].innerHTML = data;
+						}else{
+							localStorage.setItem('name',popUpInput[5].value);
+							localStorage.setItem('pwd',popUpInput[6].value);
+							userWel.innerHTML = '你好，' + popUpInput[5].value;
+							oI[1].style.display = 'none';
+							oI[2].style.display = 'none';
+							exit.innerHTML = '退出';
+							regiNone();
+
+						}
+					}else{
+						alert("发生错误：" + request.status);
+					}
+				}
+			}
+		}
+	}
+
+
+	
 	//查询结果分页
 	function goPage(){
 		var pageNo;//页码
@@ -64,34 +119,7 @@
 		}
 		
 	}
-	function login(){
-		if(popUpInput[5].value === ''){
-			popUpSpan[5].innerHTML = '用户名不能为空';
-		}else if(popUpInput[6].value === ''){
-			popUpSpan[6].value = '密码不能为空';
-		}else{
-			var request = new XMLHttpRequest();
-			request.open("GET","php/ajax.php?action=userService&username="+popUpInput[5].value+"&password="+popUpInput[6].value);
-			request.send();
-			request.onreadystatechange = function(){
-				if(request.readyState === 4){
-					if(request.status === 200){
-						var data = request.responseText;
-						if(data === '该用户不存在'){
-							popUpSpan[5].innerHTML = data;
-						}else if(data === '密码错误'){
-							popUpSpan[6].innerHTML = data;
-						}else{
-							userWel.innerHTML = '你好，' + popUpInput[5].value;
-							regiNone();
-						}
-					}else{
-						alert("发生错误：" + request.status);
-					}
-				}
-			}
-		}
-	}
+
 	for(let i=0;i<popUpInput.length;i++){
 		//事件代理
 		popUpInput[i].onblur = function(e){
@@ -186,6 +214,10 @@
 
 	//登录界面弹出层
 	function loginBlock() {
+		if(localStorage.getItem('name')){
+			popUpInput[5].value = localStorage.getItem('name');
+			popUpInput[6].value = localStorage.getItem('pwd');
+		}
 		wrapBox.style.display = 'block';
 		loginBox.style.display = 'block';
 	}
@@ -247,7 +279,7 @@
 	function searchVerseBlur(){
 		searchVerse.placeholder = 'Shake chili';
 	}
-	
+
 	
 	
 	/*addEventListener:监听DOM元素的事件
@@ -282,8 +314,39 @@
 			delete target['on' + type];
 		}
 	}
-
-
+	//收藏功能
+	function conDisClick(){
+		var conDisplayLiI = conDisplay.getElementsByTagName('i');
+		for(let j=0;j<conDisplayLiI.length;j++){
+			conDisplayLiI[j].onclick = function(){
+				switch(j%3){
+					case 2:
+						var conDisplayLiP = conDisplayLiI[j].parentNode.getElementsByTagName('p');
+						var conInfo = conDisplayLiP[0].innerHTML + '<br>' + conDisplayLiP[1].innerHTML;
+				     	var name = localStorage.getItem('name');
+				        var keyName = name + conInfo;
+						if(conDisplayLiI[j].style.color == 'rgb(90, 20, 42)'){
+							console.log('fff');
+							conDisplayLiI[j].style.color = '';
+							localStorage.removeItem(keyName);
+						}else{
+							conDisplayLiI[j].style.color = 'rgb(90,20,42)';
+					        for (var i = 0; i < localStorage.length; i++) {
+					            if (localStorage.key(i) == keyName) {
+					                localStorage.removeItem(keyName);
+					            }
+					        }//判断本地存储是否有重复信息
+					        localStorage.setItem(keyName, conInfo);
+					        var collect = document.getElementsByClassName('collect')[0];
+							var oLi = document.createElement('li');
+							oLi.innerHTML += '<p>'+ localStorage.getItem(keyName) +'</p><i class="iconfont">&#xe6e5;</i>';
+							collect.appendChild(oLi);
+						}
+						break;
+				}
+			}
+		}
+	}
 	addEventHander(searchVerse,'focus',searchVerseFocus);
 	addEventHander(searchVerse,'keyup',searchVerseKeyup);
 	addEventHander(searchVerse,'blur',searchVerseBlur);
@@ -295,6 +358,16 @@
 	addEventHander(wrapBox,'click',regiNone);
 	addEventHander(regiBtn,'click',register);
 	addEventHander(loginBtn,'click',login);
+	addEventHander(conDisplay,'click',conDisClick());//以父元素为对象，所以先调用一次
+	addEventHander(exit,'click',function(){
+		userWel.innerHTML = '';
+		exit.innerHTML = '';
+		oI[1].style.display = 'block';
+		oI[2].style.display = 'block';
+	});
+
+
+
 	
 
 
