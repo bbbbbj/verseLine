@@ -18,30 +18,44 @@
 
 <img src="http://imglf1.nosdn.127.net/img/MmQvM3dNRWZieEpTYTdJVUlqWUlaNWpidC9SemJKRWVFQm55cWpZenRSY0VUS1lxMFl2WEVRPT0.png?imageView&thumbnail=1920y949&type=jpg&quality=96&stripmeta=0&type=jpg">
 
-* 注册验证部分，通过JavaScript事件代理通过查询用户名与数据库的匹配和与注册规则的匹配。
+* 注册验证部分，通过JavaScript事件代理通过原生Ajax+PHP+MySQL查询用户名与数据库的匹配和与注册规则的匹配。验证输入合法的条件使用正则表达式实现。
+	* 用户名不能与数据库中的重复，必须是不以数字开头的4-16位的字符。
+	* 密码为8-16位数字和字母的组合且两次输入必须一致。
+	* 手机号为合法手机号，11位数字并以13,4,5,7,8,9开头。
+	* 邮箱为数字和字母+@+.com组成。
 
 <img src="http://imglf0.nosdn.127.net/img/MmQvM3dNRWZieElpRSt6YkRaQ3B0dlZqS3kzQlduVFJsK1orVXhyRWFUaWh5THNRWEt1SmlnPT0.png?imageView&thumbnail=1920y949&type=jpg&quality=96&stripmeta=0&type=jpg">
 
-* 登录，通过原生Ajax查询数据库得到账号密码匹配。下次打开网页时自动登录
+* 登录，通过原生Ajax查询数据库得到账号密码匹配。下次打开网页时自动登录。
+
+	如果匹配到用户名不存在或密码错误，返回登录失败原因。
 
 <img src="http://imglf.nosdn.127.net/img/MmQvM3dNRWZieElpRSt6YkRaQ3B0dUdielhVUDduMWlKOGhEZ24rYWtjQS93a3dZNkRUeUx3PT0.png?imageView&thumbnail=1920y949&type=jpg&quality=96&stripmeta=0&type=jpg">
 
 * 诗句和作者搜索，通过原生Ajax和PHP异步查询用户输入的诗句与MySQL数据库中诗句的属性的匹配，并返回数据在展示区显示出来。
 
+	将用户输入的原诗句与匹配到的诗句一同显示出来，组成完整的无情对，使用户在赞评收藏时有所记录和参考。
+
 <img src="http://imglf2.nosdn.127.net/img/MmQvM3dNRWZieElpRSt6YkRaQ3B0cTNmMUNSdU5NeDNOQXE3WkRpcXZ0SCtyMUoyQldzM253PT0.png?imageView&thumbnail=1920y949&type=jpg&quality=96&stripmeta=0&type=jpg">
 
-* 收藏夹和点赞。用户对诗句进行收藏和点赞时，系统会产生红色的标识。再次点击取消。用户对诗句的点击通过LocalStorage本地存储存储在浏览器端，在搜索时如果有相同的诗句组合也会有所记录。
+* 分页,在查询数据较多时，分为六条一页。点击对应的页码数可以跳转到那一页所在的区域。这里使用了JavaScript的分页的写法。
+
+<img src="http://imglf1.nosdn.127.net/img/MmQvM3dNRWZieElpRSt6YkRaQ3B0blM3WVdxQy9HN1QwTk9KUHF1U3hpV1N2MGlvSXkvVFBRPT0.png?imageView&thumbnail=1920y949&type=jpg&quality=96&stripmeta=0&type=jpg">
+
+* 收藏夹和点赞。用户对诗句进行收藏和点赞时，系统会产生红色的标识。再次点击取消。
+
+	用户对诗句的点击通过LocalStorage本地存储存储在浏览器端，在搜索时如果有相同的诗句组合也会有所记录。
 
 <img src="http://imglf1.nosdn.127.net/img/MmQvM3dNRWZieElpRSt6YkRaQ3B0aEFSZ1h1Y3hMQjIzbGRxRDI4TVBUYi9ucjAyNVo2czN3PT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
 
-* 收藏夹查看，用户对自己收藏的无情对的查看和移除。收藏夹的显示与无情对展示区的标识是同步的。
+* 收藏夹查看，用户对自己收藏的无情对的查看和移除。
+	
+	收藏夹的显示与无情对展示区的标识是同步的。在移除收藏时同时移除本地存储对应的诗句收藏信息。
 
 <img src="http://imglf2.nosdn.127.net/img/MmQvM3dNRWZieElpRSt6YkRaQ3B0dklsa01SRlVOVmQrQjdQbTdaTW1LV0V3U1hZS0hDb0x3PT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">
 
-* 评论功能，用户的评论同样通过LocalStorage本地存储的方式。用户可以看到不同用户对诗句组合的评论。
+* 评论功能，用户的评论同样通过LocalStorage本地存储的方式。
+	
+	用户可以看到不同用户对诗句组合的评论。在刷新页面和改变用户登陆时重新刷新评论点赞收藏的信息，做到与用户登录同步。
 
 <img src="http://imglf0.nosdn.127.net/img/MmQvM3dNRWZieElpRSt6YkRaQ3B0cGN6b1RUanZJalhHazhzcmlPVk55Y2s4ZndESTFBMWd3PT0.png?imageView&thumbnail=1920y949&type=jpg&quality=96&stripmeta=0&type=jpg">
-
-* 分页,在查询数据较多时，分为六条一页。
-
-<img src="http://imglf1.nosdn.127.net/img/MmQvM3dNRWZieElpRSt6YkRaQ3B0blM3WVdxQy9HN1QwTk9KUHF1U3hpV1N2MGlvSXkvVFBRPT0.png?imageView&thumbnail=1920y949&type=jpg&quality=96&stripmeta=0&type=jpg">
