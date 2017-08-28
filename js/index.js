@@ -1,29 +1,21 @@
 window.onload = function(){
-	if(localStorage.getItem('name')){
+	if(!localStorage.getItem('name') || localStorage.getItem('name') == '未登录'){
+		localStorage.setItem("name","未登录");
+	}else{
 		popUpInput[5].value = localStorage.getItem('name');
 		popUpInput[6].value = localStorage.getItem('pwd');
 		login();
 	}
-	var name = localStorage.getItem('name');
-	var conDisplayLiI = conDisplay.getElementsByTagName('i');
-	for(let i=0;i<conDisplayLiI.length;i++){
-		var p = conDisplayLiI[i].parentNode.getElementsByTagName('p')[0].innerHTML + '<br>' + conDisplayLiI[i].parentNode.getElementsByTagName('p')[1].innerHTML;
-		if(localStorage.getItem(name+p)){
-			conDisplayLiI[i].style.color = 'rgb(90,20,42)';
-		}
-	}
+	
+	disUpdate();//展示区更新
+	colUpdate();//收藏区更新
 
 }
-	var storage = window.localStorage;
-	var con = document.getElementById('container');
-	var oCircle = document.getElementById('circle');
-	var oLi = oCircle.getElementsByTagName('li');
-	var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
-	var oHeight = document.documentElement.clientHeight || document.body.clientHeight;
+	var storage = window.localStorage;	
 	var searchVerse = document.getElementById('search-verse');
 	var searchBox = document.getElementById('search-box');
 	var searchBoxP = searchBox.getElementsByTagName('p');
-	var keyBox = document.getElementById('key-box');
+	var keyBox = document.getElementById('key-box');//搜索框
 	var keyBoxLi = keyBox.getElementsByTagName('li');
 	var oI = document.getElementsByClassName('iconClick');//登录注册喜好图标
 	var popUp = document.getElementById('pop-up-box');//弹出层
@@ -38,7 +30,13 @@ window.onload = function(){
 	var userWel = document.getElementsByClassName('user-wel')[0];
 	var conDisplay = document.getElementById('con-display');//展示区
 	var exit = document.getElementsByClassName('exit')[0];
-	var userSer,passwordSer,passSer,telSer,emailSer;
+	var collect = document.getElementsByClassName('collect')[0];
+	var conDisplay = document.getElementById('con-display');
+	var conPage = document.getElementsByClassName('con-page')[0];
+	var arrayIcon = ['shayu','qiatongrenwu','guochandonghuatuijian','dongwu','liangcaitu','qiatongqiamian','zemu','minilong','feijicaise','nv-caise'];
+	var userSer,passwordSer,passSer,telSer,emailSer,comm;
+	var loc = [],coll=[],zan=[];
+
 		//登录按钮
 	function login(){
 		if(popUpInput[5].value === ''){
@@ -65,7 +63,8 @@ window.onload = function(){
 							oI[2].style.display = 'none';
 							exit.innerHTML = '退出';
 							regiNone();
-
+							disUpdate();//展示区更新
+							colUpdate();//收藏区更新
 						}
 					}else{
 						alert("发生错误：" + request.status);
@@ -120,7 +119,7 @@ window.onload = function(){
 		
 	}
 
-	for(let i=0;i<popUpInput.length;i++){
+	for(let i=0;i<5;i++){
 		//事件代理
 		popUpInput[i].onblur = function(e){
 			e = e || e.event;
@@ -214,7 +213,7 @@ window.onload = function(){
 
 	//登录界面弹出层
 	function loginBlock() {
-		if(localStorage.getItem('name')){
+		if(localStorage.getItem('name') && localStorage.getItem('name') != '未登录'){
 			popUpInput[5].value = localStorage.getItem('name');
 			popUpInput[6].value = localStorage.getItem('pwd');
 		}
@@ -314,39 +313,314 @@ window.onload = function(){
 			delete target['on' + type];
 		}
 	}
-	//收藏功能
-	function conDisClick(){
-		var conDisplayLiI = conDisplay.getElementsByTagName('i');
-		for(let j=0;j<conDisplayLiI.length;j++){
-			conDisplayLiI[j].onclick = function(){
-				switch(j%3){
-					case 2:
-						var conDisplayLiP = conDisplayLiI[j].parentNode.getElementsByTagName('p');
-						var conInfo = conDisplayLiP[0].innerHTML + '<br>' + conDisplayLiP[1].innerHTML;
-				     	var name = localStorage.getItem('name');
-				        var keyName = name + conInfo;
-						if(conDisplayLiI[j].style.color == 'rgb(90, 20, 42)'){
-							console.log('fff');
-							conDisplayLiI[j].style.color = '';
-							localStorage.removeItem(keyName);
-						}else{
-							conDisplayLiI[j].style.color = 'rgb(90,20,42)';
-					        for (var i = 0; i < localStorage.length; i++) {
-					            if (localStorage.key(i) == keyName) {
-					                localStorage.removeItem(keyName);
-					            }
-					        }//判断本地存储是否有重复信息
-					        localStorage.setItem(keyName, conInfo);
-					        var collect = document.getElementsByClassName('collect')[0];
-							var oLi = document.createElement('li');
-							oLi.innerHTML += '<p>'+ localStorage.getItem(keyName) +'</p><i class="iconfont">&#xe6e5;</i>';
-							collect.appendChild(oLi);
-						}
-						break;
+	//更新收藏区
+	function colUpdate(){
+		collect.innerHTML = '';
+		var resultColl =JSON.parse(localStorage.getItem('coll'));
+		var name = localStorage.getItem('name');
+		if(resultColl){
+			for(let j=0;j<resultColl.length;j++){
+				var conInfoColl = resultColl[j].conInfo;
+				var nameColl = resultColl[j].name;
+				var a=[];
+				if(nameColl === name){
+					a.push(conInfoColl);
+					console.log(a);
+					for(var c=0;c<a.length;c++){
+						collect.innerHTML += `<li>
+								<p>`+a[c]+`</p>
+								<i class="iconfont">&#xe6e5;</i>
+								</li>`;
+					}
+					
 				}
 			}
 		}
 	}
+	//更新展示区
+	function disUpdate(){
+		var resultColl =JSON.parse(localStorage.getItem('coll'));
+		var resultZan =JSON.parse(localStorage.getItem('zan'));
+		var resultLoc =JSON.parse(localStorage.getItem('loc'));
+		var name = localStorage.getItem('name');
+		var conDisplayLi = conDisplay.getElementsByTagName('li');
+		var wrapTop = document.getElementsByClassName('wrap-top');
+		for(let i=0;i<conDisplayLi.length;i++){
+			wrapTop[i].innerHTML = '';
+			var conInfo = conDisplayLi[i].getElementsByTagName('p')[0].innerHTML + '<br>' + conDisplayLi[i].getElementsByTagName('p')[1].innerHTML;
+			var conDisplayLiI = conDisplayLi[i].getElementsByTagName('i');
+			for(let a=0;a<conDisplayLiI.length;a++){
+				conDisplayLiI[a].style.color = '';
+			}
+			if(resultColl){
+				for(let j=0;j<resultColl.length;j++){
+					var conInfoColl = resultColl[j].conInfo;
+					var nameColl = resultColl[j].name;
+					if(conInfo === conInfoColl && name === nameColl){
+						conDisplayLi[i].getElementsByTagName('i')[2].style.color = 'rgb(90,20,42)';
+					}
+				}
+			}
+			if(resultZan){
+				for(let j=0;j<resultZan.length;j++){
+					var conInfoZan = resultZan[j].conInfo;
+					var nameZan = resultZan[j].name;
+					if(conInfo === conInfoZan && name === nameZan){
+						conDisplayLi[i].getElementsByTagName('i')[0].style.color = 'rgb(90,20,42)';
+					}
+				}
+			}
+			if(resultLoc){
+				for(let j=0;j<resultLoc.length;j++){
+					var commentInfo = resultLoc[j].commentInfo;
+					var conInfoLoc = resultLoc[j].conInfo;
+					var nameLoc = resultLoc[j].name;
+					var a=[],b=[];
+					if(conInfo === conInfoLoc){
+						a.push(commentInfo);
+						b.push(nameLoc);
+						console.log(a,b);
+						for(var c=0;c<a.length;c++){
+							wrapTop[i].innerHTML += `<div>
+									<img src="img/a.jpg" alt="">
+									<span>`+b[c]+`</span>
+									<p>`+a[c]+`</p>
+									</div>`;
+						}
+						
+					}
+				}
+			}
+			
+		}
+	}
+	//收藏功能
+	function conDisClick(e){
+		e = e || window.event;
+		el = e.srcElement || e.target;
+		var my = el.getAttribute('my');
+		console.log(my);
+		console.log('kkk');
+		switch(my){
+			case '0':
+				var conInfo = el.parentNode.getElementsByTagName('p')[0].innerHTML+'<br>'+el.parentNode.getElementsByTagName('p')[1].innerHTML;
+				var resultZan = JSON.parse(localStorage.getItem('zan'));
+				if(el.style.color == 'rgb(90, 20, 42)'){
+					for (var i = 0; i < resultZan.length; i++) {//删除本地存储
+			            if (resultZan[i].conInfo == conInfo) {
+			                zan.splice(i,1);
+			            }
+			        }
+			        localStorage.setItem('zan', JSON.stringify(zan));
+			        disUpdate();
+				}else{
+					el.style.color = 'rgb(90,20,42)';
+					var name = localStorage.getItem('name');
+					var za = {"conInfo":conInfo,"name":name};
+					if(resultZan){
+						for (var i = 0; i < resultZan.length; i++) {//判断本地存储是否有重复信息
+				            if (resultZan[i].conInfo == za.conInfo && resultZan[i].name == za.name) {
+				                zan.splice(i,1);
+				            }
+				        }
+					}
+			        zan.push(za);
+			        localStorage.setItem('zan', JSON.stringify(zan));
+				}
+
+				break;
+			case '1':
+				el.parentNode.getElementsByClassName('display-wrap')[0].style.display = 'block';
+				break;
+			case '2':
+				var conInfo = el.parentNode.getElementsByTagName('p')[0].innerHTML+'<br>'+el.parentNode.getElementsByTagName('p')[1].innerHTML;
+				var resultColl = JSON.parse(localStorage.getItem('coll'));
+				if(el.style.color == 'rgb(90, 20, 42)'){
+					for (var i = 0; i < resultColl.length; i++) {//删除本地存储
+			            if (resultColl[i].conInfo == conInfo) {
+			                coll.splice(i,1);
+			            }
+			        }
+			        localStorage.setItem('coll', JSON.stringify(coll));
+				}else{
+					el.style.color = 'rgb(90,20,42)';
+					var name = localStorage.getItem('name');
+					var col = {"conInfo":conInfo,"name":name};
+					if(resultColl){
+						for (var i = 0; i < resultColl.length; i++) {//判断本地存储是否有重复信息
+				            if (resultColl[i].conInfo == col.conInfo && resultColl[i].name == col.name) {
+				                coll.splice(i,1);
+				            }
+				        }
+					}
+			        coll.push(col);
+			        localStorage.setItem('coll', JSON.stringify(coll));
+				}
+				
+				colUpdate();
+
+				break;
+			case '3':
+				var commentInfo = el.parentNode.getElementsByTagName('input')[0].value;
+				if(commentInfo !=0){
+					var name = localStorage.getItem('name');
+					var p = el.parentNode.parentNode.parentNode.getElementsByTagName('p');
+					var conInfo = p[0].innerHTML + '<br>' + p[1].innerHTML;
+					var com = {"name":name,"conInfo":conInfo,"commentInfo":commentInfo,"src":"img/a.jpg"}
+					loc.push(com);
+					localStorage.setItem('loc',JSON.stringify(loc));
+				}
+				break;
+			case '4':
+				el.parentNode.parentNode.style.display = 'none';
+				break;
+		}
+		disUpdate();
+	}
+	
+	function collectClick(e){
+		console.log('111');
+		e = e || window.event;
+		el = e.srcElement || e.target;
+		var resultColl = JSON.parse(localStorage.getItem('coll'));
+		if(el.className == 'iconfont'){
+			console.log('222');
+			p=el.parentNode.getElementsByTagName('p')[0].innerHTML;
+			for(let i=0;i<resultColl.length;i++){
+				console.log('333');
+				if(resultColl[i].conInfo == p){
+					console.log('444');
+					resultColl.splice(i,1);
+				}
+			}
+			localStorage.setItem('coll',JSON.stringify(resultColl));
+			colUpdate();
+		}
+	}
+	//退出登录
+	function exitClick(){
+		userWel.innerHTML = '';
+		exit.innerHTML = '';
+		localStorage.removeItem('pwd');
+		localStorage.setItem('name','未登录');
+		oI[1].style.display = 'block';
+		oI[2].style.display = 'block';
+		disUpdate();//展示区更新
+		colUpdate();//收藏区更新
+	}
+	
+
+	
+	function pageSpanClick(e){
+		e = e || window.event;
+		el = e.srcElement || e.target;
+		if(el.parentNode == conPage){
+			var conDisplayLi = conDisplay.getElementsByTagName('li');
+			var pageSpan = conPage.getElementsByTagName('span');
+			for(var x=0;x<pageSpan.length;x++){
+				pageSpan[x].style.backgroundColor = '';
+			}
+			el.style.backgroundColor = 'rgb(90,20,42)';
+			for(var j=0;j<conDisplayLi.length;j++){
+				if(j<6*(parseInt(el.innerHTML)-1) || j>6*(parseInt(el.innerHTML)-1)+5){
+					conDisplayLi[j].style.display = 'none';
+				}else{
+					conDisplayLi[j].style.display = 'block';
+				}
+			}
+		}
+		// var conDisplayLi = conDisplay.getElementsByTagName('li');
+		// var pageSpan = conPage.getElementsByTagName('span');
+		// for(let i=0;i<pageSpan.length;i++){
+		// 	pageSpan[i].onclick = function(){
+		// 		for(var x=0;x<pageSpan.length;x++){
+		// 			pageSpan[x].style.backgroundColor = '';
+		// 		}
+		// 		pageSpan[i].style.backgroundColor = 'rgb(90,20,42)';
+		// 		for(var j=0;j<conDisplayLi.length;j++){
+		// 			if(j<6*i || j>6*i+5){
+		// 				conDisplayLi[j].style.display = 'none';
+		// 			}else{
+		// 				conDisplayLi[j].style.display = 'block';
+		// 			}
+		// 		}
+		// 	}
+			
+		// }
+		
+	}
+	function keyBoxClick(e){
+		e = e || window.event;
+		el = e.srcElement || e.target;
+		if(el.className == "searLi" || el.parentNode.className == "searLi"){
+			var j=el.getAttribute("total");
+				j=='0'?act='searchVerse':act='searchPoet';
+				console.log(act);
+				var conDisplayLi = conDisplay.getElementsByTagName('li');
+				var request = new XMLHttpRequest();
+				request.open("GET","php/ajax.php?action="+act+"&keyword="+document.getElementById('search-verse').value);
+				request.send();
+				request.onreadystatechange = function(){
+					if(request.readyState === 4){
+						if(request.status === 200){
+							var data = JSON.parse(request.responseText);
+							var inum = data[3][0];
+							var a=1;
+							conDisplay.innerHTML = '';
+							conPage.innerHTML = ''
+							for(var i=0;i<inum;i++){
+								var li = document.createElement('li');
+								li.innerHTML = `<svg class="iconfont search-icon" aria-hidden="true">
+													<use xlink:href="#icon-`+arrayIcon[Math.floor(Math.random()*10)]+`"></use>
+												</svg>
+												<h5>`+arrayIcon[Math.round(Math.random()*10)]+`</h5>
+												<p>`+ searchVerse.value + `</p>
+												<p>` + data[0][i]+ `</p>
+												<i class="iconfont" my="0">&#xe61f;</i>
+												<i class="iconfont" my="1">&#xe608;</i>
+												<i class="iconfont" my="2">&#xe502;</i>
+												<div class="display-wrap">
+												<div class="wrap-top"></div>
+													<div class="comment">
+														<span class="comment-span">＜</span>
+														<input type="text" placeholder="你想说点什么">
+														<i class="iconfont" my="3">&#xe608;</i>
+													</div>
+												</div>`;
+								conDisplay.appendChild(li);
+								if(i<6){
+									conDisplayLi[i].style.display = 'block';
+								}else{
+									conDisplayLi[i].style.display = 'none';
+								}
+							}
+							keyBox.style.display = 'none';
+							for(var i=0;i<searchBoxP.length;i++){
+								searchBoxP[i].style.display = 'block';
+							}
+							searchVerse.value ='';
+							if(inum/6>1){
+								for(let i=0;i<inum/6;i++){
+									var pageSpan = document.createElement('span');
+									pageSpan.innerHTML = a;
+									conPage.appendChild(pageSpan);
+									a++;
+								}
+								var pageSpan = conPage.getElementsByTagName('span');
+								pageSpan[0].style.backgroundColor = 'rgb(90,20,42)';
+							}
+							
+							pageSpanClick();
+							
+						}else{
+							alert("发生错误：" + request.status);
+						}
+					}
+				}
+		}
+	}
+	addEventHander(conPage,'click',pageSpanClick);
+	addEventHander(keyBox,'click',keyBoxClick);
 	addEventHander(searchVerse,'focus',searchVerseFocus);
 	addEventHander(searchVerse,'keyup',searchVerseKeyup);
 	addEventHander(searchVerse,'blur',searchVerseBlur);
@@ -358,13 +632,10 @@ window.onload = function(){
 	addEventHander(wrapBox,'click',regiNone);
 	addEventHander(regiBtn,'click',register);
 	addEventHander(loginBtn,'click',login);
-	addEventHander(conDisplay,'click',conDisClick());//以父元素为对象，所以先调用一次
-	addEventHander(exit,'click',function(){
-		userWel.innerHTML = '';
-		exit.innerHTML = '';
-		oI[1].style.display = 'block';
-		oI[2].style.display = 'block';
-	});
+	addEventHander(conDisplay,'click',conDisClick);//以父元素为对象，所以先调用一次
+	addEventHander(exit,'click',exitClick);
+	addEventHander(collect,'click',collectClick);//删除收藏
+
 
 
 

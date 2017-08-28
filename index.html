@@ -18,6 +18,7 @@
 		<li></li>
 	</ul>
 	<div id="pop-up-box">
+		<!-- 注册弹出层 -->
 		<div class="regi-box">
 			<ul class="regi-info">
 				<li>
@@ -57,7 +58,7 @@
 				</li>
 				<li>
 					<label for="login-possword">密码：</label>
-					<input type="text" id="login-password" placeholder="请输入登录密码">
+					<input type="password" id="login-password" placeholder="请输入登录密码">
 					<span></span>
 				</li>
 
@@ -106,9 +107,7 @@
 				</ul>
 				<div class="collecter">
 					<i class="iconfont iconClick">&#xf0148;</i>
-					<ul class="collect">
-						<li><p>枫叶荻花秋瑟瑟</p><p>闲云潭影日悠悠</p><i class="iconfont">&#xe6e5;</i></li>
-					</ul>
+					<ul class="collect"></ul>
 					<i class="iconfont iconClick">&#xe610;</i>
 					<i class="iconfont iconClick">&#xe60e;</i>
 					<span class="exit"></span>
@@ -122,13 +121,13 @@
 				<input type="text" class="search-verse" id="search-verse" placeholder="Shake chili">
 				<div class="key-box" id="key-box">
 					<ul>
-						<li>
+						<li class="searLi" total="0">
 							<svg class="iconfont search-icon" aria-hidden="true">
 								<use xlink:href="#icon-guochandonghuatuijian"></use>
 							</svg>
 							<span></span>
 						</li>
-						<li>
+						<li class="searLi" total="1">
 							<svg class="iconfont search-icon" aria-hidden="true">
 								<use xlink:href="#icon-feijicaise"></use>
 							</svg>
@@ -148,9 +147,17 @@
 					<h5>katong</h5>
 					<p>枫叶荻花秋瑟瑟</p>
 					<p>闲云潭影日悠悠</p>
-					<i class="iconfont">&#xe61f;</i>
-					<i class="iconfont">&#xe608;</i>
-					<i class="iconfont">&#xe502;</i>
+					<i class="iconfont" my = "0">&#xe61f;</i>
+					<i class="iconfont" my = "1">&#xe608;</i>
+					<i class="iconfont" my = "2">&#xe502;</i>
+					<div class="display-wrap">
+						<div class="wrap-top"></div>
+						<div class="comment">
+							<span class="comment-span" my="4">＜</span>
+							<input type="text" placeholder="你想说点什么">
+							<i class="iconfont" my = "3">&#xe608;</i>
+						</div>
+					</div>
 				</li>
 				<li>
 					<svg class="iconfont search-icon" aria-hidden="true">
@@ -159,9 +166,17 @@
 					<h5>katong</h5>
 					<p>枫叶荻花秋瑟瑟</p>
 					<p>闲云潭影日悠悠</p>
-					<i class="iconfont">&#xe61f;</i>
-					<i class="iconfont">&#xe608;</i>
-					<i class="iconfont">&#xe502;</i>
+					<i class="iconfont" my = "0">&#xe61f;</i>
+					<i class="iconfont" my = "1">&#xe608;</i>
+					<i class="iconfont" my = "2">&#xe502;</i>
+					<div class="display-wrap">
+						<div class="wrap-top"></div>
+						<div class="comment">
+							<span class="comment-span" my="4">＜</span>
+							<input type="text" placeholder="你想说点什么">
+							<i class="iconfont" my = "3">&#xe608;</i>
+						</div>
+					</div>
 				</li>
 				<li>
 					<svg class="iconfont search-icon" aria-hidden="true">
@@ -170,9 +185,17 @@
 					<h5>minilong</h5>
 					<p>飞雪连天射白鹿</p>
 					<p>笑书神侠倚碧鸳</p>
-					<i class="iconfont">&#xe61f;</i>
-					<i class="iconfont">&#xe608;</i>
-					<i class="iconfont">&#xe502;</i>
+					<i class="iconfont" my = "0">&#xe61f;</i>
+					<i class="iconfont" my = "1">&#xe608;</i>
+					<i class="iconfont" my = "2">&#xe502;</i>
+					<div class="display-wrap">
+						<div class="wrap-top"></div>
+						<div class="comment">
+							<span class="comment-span" my="4">＜</span>
+							<input type="text" placeholder="你想说点什么">
+							<i class="iconfont" my = "3">&#xe608;</i>
+						</div>
+					</div>
 				</li>
 				<li>
 					<svg class="iconfont search-icon" aria-hidden="true">
@@ -181,9 +204,17 @@
 					<h5>katong</h5>
 					<p>枫叶荻花秋瑟瑟</p>
 					<p>闲云潭影日悠悠</p>
-					<i class="iconfont">&#xe61f;</i>
-					<i class="iconfont">&#xe608;</i>
-					<i class="iconfont">&#xe502;</i>
+					<i class="iconfont" my = "0">&#xe61f;</i>
+					<i class="iconfont" my = "1">&#xe608;</i>
+					<i class="iconfont" my = "2">&#xe502;</i>
+					<div class="display-wrap">
+						<div class="wrap-top"></div>
+						<div class="comment">
+							<span class="comment-span" my="4">＜</span>
+							<input type="text" placeholder="你想说点什么">
+							<i class="iconfont" my = "3">&#xe608;</i>
+						</div>
+					</div>
 				</li>
 				<li>
 					<svg class="iconfont search-icon" aria-hidden="true">
@@ -192,9 +223,17 @@
 					<h5>katong</h5>
 					<p>枫叶荻花秋瑟瑟</p>
 					<p>闲云潭影日悠悠</p>
-					<i class="iconfont">&#xe61f;</i>
-					<i class="iconfont">&#xe608;</i>
-					<i class="iconfont">&#xe502;</i>
+					<i class="iconfont" my = "0">&#xe61f;</i>
+					<i class="iconfont" my = "1">&#xe608;</i>
+					<i class="iconfont" my = "2">&#xe502;</i>
+					<div class="display-wrap">
+						<div class="wrap-top"></div>
+						<div class="comment">
+							<span class="comment-span" my="4">＜</span>
+							<input type="text" placeholder="你想说点什么">
+							<i class="iconfont" my = "3">&#xe608;</i>
+						</div>
+					</div>
 				</li>
 				<li>
 					<svg class="iconfont search-icon" aria-hidden="true">
@@ -203,9 +242,17 @@
 					<h5>katong</h5>
 					<p>枫叶荻花秋瑟瑟</p>
 					<p>闲云潭影日悠悠</p>
-					<i class="iconfont">&#xe61f;</i>
-					<i class="iconfont">&#xe608;</i>
-					<i class="iconfont">&#xe502;</i>
+					<i class="iconfont" my = "0">&#xe61f;</i>
+					<i class="iconfont" my = "1">&#xe608;</i>
+					<i class="iconfont" my = "2">&#xe502;</i>
+					<div class="display-wrap">
+						<div class="wrap-top"></div>
+						<div class="comment">
+							<span class="comment-span" my="4">＜</span>
+							<input type="text" placeholder="你想说点什么">
+							<i class="iconfont" my = "3">&#xe608;</i>
+						</div>
+					</div>
 				</li>
 			</ul>
 			<p class="con-page"></p>
@@ -237,7 +284,6 @@
 
 <script src="js/canvas.js"></script>
 <script src="js/index.js"></script>
-<script src="js/ajax.js" charset="utf-8"></script>
 <script src="font/iconfont.js"></script>
 </body>
 </html>

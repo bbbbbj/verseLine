@@ -107,6 +107,7 @@ header .iconfont{
 	opacity: .5;
 	line-height: 50px;
 	box-sizing: border-box;
+	position: relative;
 }
 .header-menu>li:hover{
 	opacity: 1;
@@ -330,6 +331,7 @@ i.iconfont:hover{
 	background-color: #fff;
 	transition: all .5s;
 	border-radius: 5px;
+	position: relative;
 }
 .con-display li:hover{
 	transform: scale(1.05);
@@ -362,6 +364,76 @@ i.iconfont:hover{
 }
 .con-display>li:hover i.iconfont{
 	opacity: 1;
+}
+/*评论区*/
+.con-display .display-wrap{
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	transition: all .5s;
+	border-radius: 5px;
+	overflow: auto;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+}
+.con-display .display-wrap div{
+	width: 90%;
+	margin: 10px auto;
+	border-bottom: 4px dotted #666;
+}
+.con-display .display-wrap div.wrap-top{
+	height: 80%;
+	overflow: auto;
+	border: none;
+}
+.con-display .display-wrap img{
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	vertical-align: middle;
+}
+.con-display .display-wrap span{
+	font-size: 14px;
+	padding-left: 10px;
+	color: #666;
+	vertical-align: middle;
+}
+.con-display .display-wrap p{
+	line-height: 20px;
+	font-size: 16px;
+	padding-left: 60px;
+	text-indent: 2em;
+	box-sizing: border-box;
+	text-align: left;
+	word-break:break-word;/*文字超出换行*/
+	margin-bottom: 10px;
+}
+/*评论部分*/
+.con-display .display-wrap div.comment{
+	width: 90%;
+	height: 12%;
+	position: absolute;
+	left: 10px;
+	bottom: 0;
+	border: none;
+}
+.con-display .display-wrap div.comment span{
+	font-size: 24px;
+	line-height: 24px;
+	cursor: pointer;
+}
+.con-display .display-wrap div.comment .iconfont{
+	opacity: 1;
+}
+.con-display .display-wrap div.comment .iconfont{
+	transform: scale(1);
+}
+.con-display .display-wrap div.comment input{
+	margin-left: 30px;
+	border-radius: 5px;
+	border: 1px solid #000;
 }
 /*分页*/
 .con-page{

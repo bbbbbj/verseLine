@@ -1,7 +1,7 @@
 var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
 var oHeight = document.documentElement.clientHeight || document.body.clientHeight;
-	oCanvas();
-	oCanvas2();
+oCanvas();
+oCanvas2();
 function oCanvas2(){
 	var lines = [];
 	var canvas2 = document.getElementById('canvas2');
