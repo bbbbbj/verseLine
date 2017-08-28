@@ -16,7 +16,7 @@
 
 * 网页的小图标使用iconfont字体图标，展示部分使用了flex布局，根据定义的数组随机生成图标。
 
-<img src="http://imglf2.nosdn.127.net/img/MmQvM3dNRWZieElpRSt6YkRaQ3B0dXJnVHRINHZjcUNnbFJmY0Y0ZW1vbHRuRDVuT0tjMjJBPT0.png?imageView&thumbnail=1920y949&type=jpg&quality=96&stripmeta=0&type=jpg">
+<img src="http://imglf1.nosdn.127.net/img/MmQvM3dNRWZieEpTYTdJVUlqWUlaNWpidC9SemJKRWVFQm55cWpZenRSY0VUS1lxMFl2WEVRPT0.png?imageView&thumbnail=1920y949&type=jpg&quality=96&stripmeta=0&type=jpg">
 
 * 注册验证部分，通过JavaScript事件代理通过查询用户名与数据库的匹配和与注册规则的匹配。
 
