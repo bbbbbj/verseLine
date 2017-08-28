@@ -1,7 +1,48 @@
 var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
 var oHeight = document.documentElement.clientHeight || document.body.clientHeight;
-oCanvas();
-oCanvas2();
+//画布背景星空
+function oCanvas(){
+	var circles = [];
+	var canvas = document.getElementById('canvas');//获取canvas元素	
+	canvas.width = oWidth;
+	canvas.height = oHeight;	
+	var context = canvas.getContext('2d');
+
+	//创建构造函数circle
+	function Circle(){
+		this.x = Math.random()*canvas.width;//在画布随机生成x值
+		this.r = Math.random()*1.5;//随机半径
+		//绘制圆形
+		this.y = Math.random()*canvas.height;
+		
+		this.paint = function(){
+			context.beginPath();
+			context.fillStyle = '#706e7f';
+			context.arc(this.x,this.y,this.r,0,Math.PI*2);//绘制圆形
+			context.fill();
+		}
+	}
+
+	//创建圆形对象
+	function createCircles(){
+		for(var i=0;i<100;i++){
+			var circle = new Circle();//调用构造函数
+			circles[circles.length] = circle;//将绘制的图形追加到数组
+		}
+	}
+
+	//绘制所有圆形
+	function paintCircles(){
+		for(var i=0;i<circles.length;i++){
+			circles[i].paint();//遍历数组，将数组内的图形绘制
+		}
+	}
+
+	createCircles();
+	paintCircles();
+}
+
+//流星绘制与更新
 function oCanvas2(){
 	var lines = [];
 	var canvas2 = document.getElementById('canvas2');
@@ -45,7 +86,7 @@ function oCanvas2(){
 		}
 	}
 
-	//更新线条
+	//更新流星
 	function update(){
 		for(var i=0;i<lines.length;i++){
 			lines[i].x -= lines[i].v;
@@ -60,45 +101,8 @@ function oCanvas2(){
 		}
 	}
 }
-
-function oCanvas(){
-	var circles = [];
-	var canvas = document.getElementById('canvas');//获取canvas元素	
-	canvas.width = oWidth;
-	canvas.height = oHeight;	
-	var context = canvas.getContext('2d');
-
-	//创建构造函数circle
-	function Circle(){
-		this.x = Math.random()*canvas.width;//在画布随机生成x值
-		this.r = Math.random()*1.5;//随机半径
-		//绘制圆形
-		this.y = Math.random()*canvas.height;
-		
-		this.paint = function(){
-			context.beginPath();
-			context.fillStyle = '#706e7f';
-			context.arc(this.x,this.y,this.r,0,Math.PI*2);//绘制圆形
-			context.fill();
-		}
-	}
-
-	//创建圆形对象
-	function createCircles(){
-		for(var i=0;i<100;i++){
-			var circle = new Circle();//调用构造函数
-			circles[circles.length] = circle;//将绘制的图形追加到数组
-		}
-	}
-	//绘制所有圆形
-	function paintCircles(){
-		for(var i=0;i<circles.length;i++){
-			circles[i].paint();//遍历数组，将数组内的图形绘制
-		}
-	}
-	createCircles();
-	paintCircles();
-}
+oCanvas();
+oCanvas2();
 //窗口大小改变时，画布重绘
 window.onresize = function(){
 	oWidth = document.documentElement.clientWidth || document.body.clientWidth;

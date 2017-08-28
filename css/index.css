@@ -1,12 +1,4 @@
-/*图标*/
-.iconfont{
-	width: 2em;
-	height: 2em;
-	vertical-align: -0.15em;
-	fill: currentColor;
-	overflow: hidden;
-	transition: all .5s;
-}
+
 html,body{
 	width: 100%;
 	height: 100%;
@@ -35,6 +27,7 @@ html,body{
 .circle li{
 	border-radius: 50%;
 	position: absolute;
+	-moz-transition: all 5s;
 	transition: all 5s;
 }
 .circle li:nth-child(1){
@@ -42,6 +35,9 @@ html,body{
 	height: 350px;
 	top: -200px;
 	right: 12%;
+	background: -webkit-radial-gradient(circle at 100px 100px,#53253c,rgb(66,20,42));
+	background: -moz-radial-gradient(circle at 100px 100px,#53253c,rgb(66,20,42));
+	background: -ms-radial-gradient(circle at 100px 100px,#53253c,rgb(66,20,42));
 	background: radial-gradient(circle at 100px 100px,#53253c,rgb(66,20,42));
 }
 .circle li:nth-child(2){
@@ -49,6 +45,9 @@ html,body{
 	height: 30px;
 	top: 250px;
 	right: 30%;
+	background: -webkit--radial-gradient(circle at 10px 10px,#2c2046,rgb(25,18,40));
+	background: -moz-radial-gradient(circle at 10px 10px,#2c2046,rgb(25,18,40));
+	background: -ms-radial-gradient(circle at 10px 10px,#2c2046,rgb(25,18,40));
 	background: radial-gradient(circle at 10px 10px,#2c2046,rgb(25,18,40));
 }
 .circle li:nth-child(3){
@@ -56,6 +55,9 @@ html,body{
 	height: 60px;
 	top: 500px;
 	right: 25%;
+	background: -webkit-radial-gradient(circle at 20px 20px,#11163f,rgb(16,18,40));
+	background: -moz-radial-gradient(circle at 20px 20px,#11163f,rgb(16,18,40));
+	background: -ms-radial-gradient(circle at 20px 20px,#11163f,rgb(16,18,40));
 	background: radial-gradient(circle at 20px 20px,#11163f,rgb(16,18,40));
 }
 .circle li:nth-child(4){
@@ -63,6 +65,9 @@ html,body{
 	height: 100px;
 	top: 300px;
 	right: 12%;
+	background: -webkit-radial-gradient(circle at 30px 30px,#372d35,rgb(33,27,32));
+	background: -moz-radial-gradient(circle at 30px 30px,#372d35,rgb(33,27,32));
+	background: -ms-radial-gradient(circle at 30px 30px,#372d35,rgb(33,27,32));
 	background: radial-gradient(circle at 30px 30px,#372d35,rgb(33,27,32));
 }
 .container-box{
@@ -77,6 +82,15 @@ html,body{
 	left: 50%;
 	margin: 0 auto;
 	
+}
+/*图标*/
+.iconfont{
+	width: 2em;
+	height: 2em;
+	vertical-align: -0.15em;
+	fill: currentColor;
+	overflow: hidden;
+	transition: all .5s;
 }
 /*页面头部*/
 header{
@@ -104,12 +118,21 @@ header .iconfont{
 	display: inline-block;
 	letter-spacing: 0;
 	color: #fff;
+	-webkit-opacity: .5;
+	-moz-opacity: .5;
+	-ms-opacity: .5;
 	opacity: .5;
 	line-height: 50px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
 	box-sizing: border-box;
 	position: relative;
 }
 .header-menu>li:hover{
+	-webkit-opacity: 1;
+	-moz-opacity: 1;
+	-ms-opacity: 1;
 	opacity: 1;
 	cursor: pointer;
 }
@@ -120,7 +143,13 @@ header .iconfont{
 	border-radius: 5px;
 	top: 40px;
 	visibility: hidden;
+	-webkit-opacity: 0;
+	-moz-opacity: 0;
+	-ms-opacity: 0;
 	opacity: 0;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
 	transition: all .5s;
 }
 .header-menu li ul li{
@@ -131,12 +160,24 @@ header .iconfont{
 	padding-left: 20px;
 	letter-spacing: 0;
 	color: #fff;
+	-webkit-opacity: .8;
+	-moz-opacity: .8;
+	-ms-opacity: .8;
 	opacity: .8;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .header-menu>li:hover ul{
 	visibility: visible;
+	-webkit-opacity: 1;
+	-moz-opacity: 1;
+	-ms-opacity: 1;
 	opacity: 1;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
 	transition: all .5s;
 }
 .header-menu li ul li:hover{
@@ -181,8 +222,14 @@ i.iconfont:hover{
 	position: fixed;
 	right: -250px;
 	top: 50px;
+	-webkit-opacity: .5;
+	-moz-opacity: .5;
+	-ms-opacity: .5;
 	opacity: .5;
 	border-radius: 10px;
+	-webkit-transition: right linear .5s;
+	-moz-transition: right linear .5s;
+	-ms-transition: right linear .5s;
 	transition: right linear .5s;
 }
 .collecter .iconfont:first-child:hover + .collect{
@@ -274,6 +321,9 @@ i.iconfont:hover{
 	min-width: 180px;
 	width: auto;
 	height: 50px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 0 20px;
 	margin: 30px auto;
@@ -283,7 +333,6 @@ i.iconfont:hover{
 	letter-spacing: 1px;
 	border-radius: 25px;
 	cursor: pointer;
-	box-sizing: border-box;
 	transition: all .5s;
 }
 .key-box ul li .search-icon{
@@ -334,6 +383,9 @@ i.iconfont:hover{
 	position: relative;
 }
 .con-display li:hover{
+	-webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	-ms-transform: scale(1.05);
 	transform: scale(1.05);
 }
 .con-display li .search-icon{
@@ -359,10 +411,19 @@ i.iconfont:hover{
 	color: #090723;
 }
 .con-display i.iconfont{
+	-webkit-opacity: 0;
+	-moz-opacity: 0;
+	-ms-opacity: 0;
 	opacity: 0;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
 	transition: all .5s;
 }
 .con-display>li:hover i.iconfont{
+	-webkit-opacity: 1;
+	-moz-opacity: 1;
+	-ms-opacity: 1;
 	opacity: 1;
 }
 /*评论区*/
@@ -370,6 +431,9 @@ i.iconfont:hover{
 	width: 100%;
 	height: 100%;
 	background-color: #fff;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
 	transition: all .5s;
 	border-radius: 5px;
 	overflow: auto;
@@ -405,6 +469,9 @@ i.iconfont:hover{
 	font-size: 16px;
 	padding-left: 60px;
 	text-indent: 2em;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
 	box-sizing: border-box;
 	text-align: left;
 	word-break:break-word;/*文字超出换行*/
@@ -425,9 +492,15 @@ i.iconfont:hover{
 	cursor: pointer;
 }
 .con-display .display-wrap div.comment .iconfont{
+	-webkit-opacity: 1;
+	-moz-opacity: 1;
+	-ms-opacity: 1;
 	opacity: 1;
 }
 .con-display .display-wrap div.comment .iconfont{
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
 	transform: scale(1);
 }
 .con-display .display-wrap div.comment input{
@@ -455,6 +528,9 @@ i.iconfont:hover{
 .con-page span:hover{
 	background-color: rgb(90,20,42);
 	cursor: pointer;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
 	transition: all .5s;
 }
 
@@ -502,6 +578,9 @@ footer p:last-child{
 	z-index: 999;
 	position: fixed;
 	border-radius: 8px;
+	-webkit-box-shadow: 0 0 15px #000;
+	-moz-box-shadow: 0 0 15px #000;
+	-ms-box-shadow: 0 0 15px #000;
 	box-shadow: 0 0 15px #000;
 	display: none;
 }
@@ -548,6 +627,9 @@ footer p:last-child{
 	background-color: #aaa;
 	position: fixed;
 	z-index: 888;
+	-webkit-opacity: .3;
+	-moz-opacity: .3;
+	-ms-opacity: .3;
 	opacity: .3;
 	display: none;
 }
@@ -563,6 +645,9 @@ footer p:last-child{
 	z-index: 999;
 	position: fixed;
 	border-radius: 8px;
+	-webkit-box-shadow: 0 0 15px #000;
+	-moz-box-shadow: 0 0 15px #000;
+	-ms-box-shadow: 0 0 15px #000;
 	box-shadow: 0 0 15px #000;
 	display: none;
 }
