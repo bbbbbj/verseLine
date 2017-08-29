@@ -1,3 +1,16 @@
+(function(doc, win){
+    var docE1 = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function(){
+            var clientWidth = docE1.clientWidth;
+            if(!clientWidth) return;
+            docE1.style.fontSize = 20 * (clientWidth / 1500) + 'px';            
+        };
+
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt,recalc,false);
+    doc.addEventListener('DOMContentLoaded',recalc,false);
+})(document,window);
 	//页面加载调用本地存储信息，实现自动登录，个人收藏点赞评论等信息的更新
 	window.onload = function(){
 		//完成自动登录
@@ -47,12 +60,12 @@
 		sTop = document.documentElement.scrollTop || document.body.scrollTop;
 		if(sTop === 0){
 			scroll = false;
-			oLi[0].style.top = -180 + 'px';
+			oLi[0].style.top = -9 + 'rem';
 			for(var i=1;i<oLi.length;i++){
 				oLi[i].style.transform = 'scale(1)';
 			}
 		}else{
-			oLi[0].style.top = -220 + 'px';
+			oLi[0].style.top = -11 + 'rem';
 			for(var i=1;i<oLi.length;i++){
 				oLi[i].style.transform = 'scale(0.8)';
 				oLi[i].style.webkitTransform = 'scale(0.8)';
