@@ -590,9 +590,9 @@ footer p:last-child{
 	display: none;
 }
 .regi-info{
-	width: 28rem;
-	height: 17remrem;
-	margin: 2.5rem 0 0 5rem;
+	width: 30rem;
+	height: 17rem;
+	margin: 2.5rem 0 0 4rem;
 }
 .regi-info li{
 	width: 100%;
@@ -600,7 +600,7 @@ footer p:last-child{
 }
 .login-info li label,.regi-info li label{
 	display: inline-block;
-	width: 5rem;
+	width: 6rem;
 	font-size: 0.8rem;
 	line-height: 3rem;
 	letter-spacing: 0.1rem;
